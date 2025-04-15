@@ -34,7 +34,7 @@
                 <?php echo do_shortcode('[velocity-iklan-galeri]'); ?>
             </div>
             <div class="mt-2">
-                <?php echo get_the_content(); ?>
+            <?php $content = apply_filters('the_content', get_the_content()); echo $content; ?>
             </div>
         </div>
         </div>
