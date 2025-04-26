@@ -32,6 +32,11 @@ function velocityiklan_theme_setup() {
 			'title'    => __('Biaya Iklan', 'justg'),
 			'priority' => 10,
 		]);
+		Kirki::add_section('section_catatanvmpc', [
+			'panel'    => 'panel_vmpc',
+			'title'    => __('Catatan Single', 'justg'),
+			'priority' => 10,
+		]);
 		
 		// Field Biaya
 		new \Kirki\Field\Number([
@@ -78,6 +83,13 @@ function velocityiklan_theme_setup() {
     			'min'  => 0,
     			'step' => 1,
     		],
+    	]);
+    	new \Kirki\Field\Editor([
+    		'settings'    => 'catatan_single',
+    		'label'       => esc_html__( 'Catatan Single', 'justg' ),
+    		'description' => esc_html__( 'This is an editor control.', 'justg' ),
+    		'section'     => 'section_catatanvmpc',
+    		'default'     => '',
     	]);
 
 	endif;

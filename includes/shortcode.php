@@ -89,6 +89,9 @@ function velocity_iklan_registrasi_form() {
             if ( empty( $errors->errors ) ) {
                 $user_id = wp_create_user( $username, $password, $email );
                 if ( !is_wp_error($user_id) ) {
+                    // Atur role user jadi 'editor', 'author', 'subscriber', dst.
+                    $user = new WP_User( $user_id );
+                    $user->set_role( 'editor' );
                     wp_update_user( array(
                         'ID'         => $user_id,
                         'first_name' => $first_name,
@@ -383,7 +386,7 @@ add_shortcode('velocity-link-loop', function($atts){
     $post_id = $atribut['post_id'];
     $class = $atribut['class'];
     $url_iklan  = get_post_meta($post_id,'wb-blog', true);
-    $author_id = get_post_field( 'post_author', $post_id );
+    $author = get_post_field( 'post_author', $post_id );
     if($author) {
         $author_id = $author;
     }

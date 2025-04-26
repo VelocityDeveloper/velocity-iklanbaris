@@ -396,7 +396,7 @@ add_action('init', 'modify_subscriber_role');
 // Filter untuk membatasi tampilan media
 function filter_media_library($query) {
     // Hanya jalankan filter jika pengguna adalah 'subscriber'
-    if (current_user_can('subscriber')) {
+    if (! current_user_can( 'manage_options' )) {
         $query['author'] = get_current_user_id();
     }
     return $query;
@@ -427,3 +427,22 @@ function vmpc_title(){
 	}
 	return $title;
 }
+
+
+//viewers
+function theme_setPostViews() {
+    if (is_singular() && !current_user_can('administrator')) {
+        global $post;
+        if (!isset($post->ID)) return;
+
+        $postID    = $post->ID;
+        $count_key = 'hit';
+        $count     = get_post_meta($postID, $count_key, true);
+
+        $count     = intval($count);
+        $count++;
+
+        update_post_meta($postID, $count_key, $count);
+    }
+}
+add_action('wp', 'theme_setPostViews');

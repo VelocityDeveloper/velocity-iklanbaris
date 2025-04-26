@@ -43,6 +43,11 @@
             <div class="mt-3 py-2 px-3 bg-light border">
                 <?php echo 'Iklan ini sudah dilihat <strong>'.do_shortcode('[view]').'</strong>.'; ?>
             </div>
+            <div class="mt-3 py-2 px-3 bg-light border">
+                <?php $catatan_single = get_theme_mod( 'catatan_single' ); 
+                echo $catatan_single;
+                ?>
+            </div>
         </div>
     </div>
     <?php endwhile;
